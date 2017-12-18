@@ -1,0 +1,92 @@
+
+Data Collection (Compiled Data)
+
+File:     f:\documents\ÔÁs41\v430\1.inp
+Comment:  
+Date:     2008Äê12ÔÂ2ÈÕ 3:41:43
+
+Measurement     1: Data Collection Point(s) 1, 2, 3
+Measurement     2: Data Collection Point(s) 4, 5
+Measurement     3: Data Collection Point(s) 6, 7
+Measurement     4: Data Collection Point(s) 8
+Measurement     5: Data Collection Point(s) 9, 10
+Measurement     6: Data Collection Point(s) 11
+Measurement     7: Data Collection Point(s) 12, 13, 14, 15
+Measurement     8: Data Collection Point(s) 16, 17, 18
+Measurement     9: Data Collection Point(s) 19, 20
+Measurement    10: Data Collection Point(s) 21, 22
+Measurement    11: Data Collection Point(s) 23
+Measurement    12: Data Collection Point(s) 24
+Measurement    13: Data Collection Point(s) 25
+Measurement    14: Data Collection Point(s) 26
+Measurement    15: Data Collection Point(s) 27
+Measurement    16: Data Collection Point(s) 28, 29
+Measurement    17: Data Collection Point(s) 30
+Measurement    18: Data Collection Point(s) 31
+Measurement    19: Data Collection Point(s) 32, 33, 34, 35
+Measurement    20: Data Collection Point(s) 36
+Measurement    21: Data Collection Point(s) 37
+Measurement    22: Data Collection Point(s) 38
+Measurement    23: Data Collection Point(s) 39, 40
+Measurement    24: Data Collection Point(s) 41
+Measurement    25: Data Collection Point(s) 42, 43
+Measurement    26: Data Collection Point(s) 44
+Measurement    27: Data Collection Point(s) 45, 46, 47
+Measurement    28: Data Collection Point(s) 48, 49, 50
+Measurement    29: Data Collection Point(s) 51, 52, 53
+Measurement    30: Data Collection Point(s) 54, 55, 56
+Measurement    31: Data Collection Point(s) 57, 58, 59
+Measurement    32: Data Collection Point(s) 60, 61, 62, 63
+Measurement    33: Data Collection Point(s) 64, 65, 66, 67
+Measurement    34: Data Collection Point(s) 68, 69, 70, 71
+Measurement    35: Data Collection Point(s) 72, 73, 74, 75
+Measurement    36: Data Collection Point(s) 76, 77, 78
+Measurement    37: Data Collection Point(s) 79, 80, 81
+Measurement    38: Data Collection Point(s) 82, 83, 84
+
+Measur.: Data Collection Number
+from: Start time of the Aggregation interval
+to: End time of the Aggregation interval
+Number Veh: Number of Vehicles
+
+Measur.;from;to;Number Veh
+       ;    ;  ;
+       ;    ;  ;all veh. types
+1;0;1800;228
+2;0;1800;69
+3;0;1800;98
+4;0;1800;18
+5;0;1800;13
+6;0;1800;133
+7;0;1800;464
+8;0;1800;98
+9;0;1800;5
+10;0;1800;6
+11;0;1800;0
+12;0;1800;4
+13;0;1800;82
+14;0;1800;48
+15;0;1800;15
+16;0;1800;25
+17;0;1800;16
+18;0;1800;25
+19;0;1800;226
+20;0;1800;0
+21;0;1800;9
+22;0;1800;31
+23;0;1800;2
+24;0;1800;24
+25;0;1800;41
+26;0;1800;59
+27;0;1800;185
+28;0;1800;215
+29;0;1800;279
+30;0;1800;189
+31;0;1800;275
+32;0;1800;217
+33;0;1800;184
+34;0;1800;470
+35;0;1800;424
+36;0;1800;347
+37;0;1800;280
+38;0;1800;267
