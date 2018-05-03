@@ -1,5 +1,5 @@
-function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,qout,qin,beta,w,rhooff,...
-    Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,...
+function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
+    Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,... %qin% %qout%
     phir,phib,phiw,vf,alpha,A,E,T)
     
     %split input matrix
@@ -13,38 +13,38 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,qout,qin,beta
     pi=0;
     rhol1=rhol;
     vl1=vl;
-    qin1=qin;
-    qout1=qout;
+    qin1=zeros(1,9);
+    %qout1=qout;
     w1=w;
     rhooff1=rhooff;
     von1=von;
     ql1=ql;
-    rhol2=zeros(20,1);
-    vl2=zeros(20,1);
-    ql2=zeros(20,1);
-    qin2=zeros(9,1);
-    qout2=zeros(14,1);
-    w2=zeros(13,1);
-    rhooff2=zeros(14,1);
-    Qo=zeros(13,1);
+    rhol2=zeros(1,20);
+    vl2=zeros(1,20);
+    ql2=zeros(1,20);
+    %qin2=zeros(9,1);
+    %qout2=zeros(14,1);
+    w2=zeros(1,13);
+    rhooff2=zeros(1,14);
+    Qo=zeros(1,13);
     
     onramp_next_link=[0;3;0;5;6;9;10;12;13;16;0;18;0];
     %offramp_next_link=[1;0;1;0
     
-    node_in_out=[...   %in out1 out2 out3
-        0,1,0,0;... %1
-        1,0,0,0;
-        0,2,0,0;
-        2,0,0,0;
-        3,3,0,0;    %5
-        4,4,0,0;
-        5,9,10,11;
-        6,12,13,14;
-        7,7,0,0;
-        8,8,0,0;    %10
-        0,9,0,0;
-        9,0,0,0;
-        0,10,0,0;]; %13
+    node_in_out=[...    %in out1 out2 out3 in_link_no
+        0,1,0,0,1;...   %1
+        1,0,0,0,2;
+        0,2,0,0,3;
+        2,0,0,0,4;
+        3,3,0,0,5;      %5
+        4,4,0,0,8;
+        5,9,10,11,9;
+        6,12,13,14,11;
+        7,7,0,0,12;
+        8,8,0,0,15;     %10
+        0,9,0,0,16;
+        9,0,0,0,17;
+        0,10,0,0,18;];  %13
     
     link_node=[...  %prev, next
         -1,1;       %-1=node not exist
@@ -74,14 +74,15 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,qout,qin,beta
        
         %% Qo
         for j=1:13
+            Qo=ql1(node_in_out(j,5));
             if node_in_out(j,1)~=0
                 Qo=Qo+qin1(node_in_out(j,1));
             end
-            for k=2:4
-               if node_in_out(j,k)~=0
-                   Qo=Qo+qout1(node_in_out(j,k));
-               end
-            end
+            %for k=2:4
+            %   if node_in_out(j,k)~=0
+            %       Qo=Qo+qout1(node_in_out(j,k));
+            %   end
+            %end
         end
         
        %% On-ramps
@@ -91,18 +92,18 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,qout,qin,beta
                 link_id=onramp_next_link(j);
                 qo2=Qc(link_id)*min(1,(rhomax-rhol1(link_id))...
                     /(rhomax-rhocrit));
-                qo=r(j,min(i,Nc))*min(qo1,qo2);
-                w2(j)=w1(j)+T*(d(j)-qo);
+                qin1(link_id)=r(j,min(i,Nc))*min(qo1,qo2);
+                w2(j)=w1(j)+T*(d(j)-qin1(link_id));
             end
         end
         
        %% Off-ramps
-        for j=1:20  %each node
+        for j=1:13  %each node
             for k=2:4
                 offramp_no=node_in_out(j,k);
                 if offramp_no~=0
                     rhooff2(offramp_no)=rhooff1(offramp_no)+...
-                        T*(Qo(j)*beta(min(j,Np-1)))/...
+                        T*Qo(j)*beta(j)/...
                         (Loff(offramp_no)*lambdaoff(offramp_no));
                 end
             end
@@ -180,20 +181,20 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,qout,qin,beta
        %% Discard old state
         rhol1=rhol;
         vl1=vl2;
-        qin1=qin2;
-        qout1=qout2;
+        %qin1=qin2;
+        %qout1=qout2;
         w1=w2;
         rhooff1=rhooff2;
         von1=von2;
         ql1=ql2;
-        rhol2=zeros(20,1);
-        vl2=zeros(20,1);
-        ql2=zeros(20,1);
-        qin2=zeros(9,1);
-        qout2=zeros(14,1);
-        w2=zeros(13,1);
-        rhooff2=zeros(14,1);
-        Qo=zeros(13,1);
+        rhol2=zeros(1,20);
+        vl2=zeros(1,20);
+        ql2=zeros(1,20);
+        %qin2=zeros(9,1);
+        %qout2=zeros(14,1);
+        w2=zeros(1,13);
+        rhooff2=zeros(1,14);
+        Qo=zeros(1,13);
     end
     
     %b
