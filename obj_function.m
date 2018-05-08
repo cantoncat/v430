@@ -1,4 +1,9 @@
-function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
+
+%original objective function
+%output V is suppressed by wrapper() in fmincin()
+%output pi is supressed while estimating future traffic conditions
+
+function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
     Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,... %qin% %qout%
     phir,phib,phiw,vf,alpha,A,E,T)
     
@@ -9,10 +14,12 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
     b=X0(1:20,Nc+1:c);
     
     %% initial values
-    % 1 for k and 2 for k+1
+    V=zeros(Np-1,20);
+    V=[vl;V];
+    % 1 for k and 2 for k+1 except for V the matrix
     pi=0;
     rhol1=rhol;
-    vl1=vl;
+    %vl1=vl;
     qin1=zeros(1,9);
     %qout1=qout;
     w1=w;
@@ -20,7 +27,7 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
     von1=von;
     ql1=ql;
     rhol2=zeros(1,20);
-    vl2=zeros(1,20);
+    %vl2=zeros(1,20);
     ql2=zeros(1,20);
     %qin2=zeros(9,1);
     %qout2=zeros(14,1);
@@ -29,7 +36,6 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
     Qo=zeros(1,13);
     
     onramp_next_link=[0;3;0;5;6;9;10;12;13;16;0;18;0];
-    %offramp_next_link=[1;0;1;0
     
     node_in_out=[...    %in out1 out2 out3 in_link_no
         0,1,0,0,1;...   %1
@@ -135,14 +141,14 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
             if prev_node==-1
                 tmp_v2=0;
             elseif prev_node==0
-                tmp_v2=(T/L(j))*vl1(j)*(vl1(j-1)-vl1(j));
+                tmp_v2=(T/L(j))*V(i,j)*(V(i,j-1)-V(i,j));
             else
                 on_link=node_in_out(prev_node,1);
-                virtual_a=vl1(j-1)*ql1(j-1)...
+                virtual_a=V(i,j-1)*ql1(j-1)...
                     +qin1(on_link)*von1(on_link);    %Numerator for virtual_v
                 virtual_b=ql1(j-1)+qin1(on_link);    %Denominator for virtual_v
                 virtual_v=virtual_a/virtual_b;
-                tmp_v2=(T/L(j))*vl1(j)*(virtual_v-vl1(j));
+                tmp_v2=(T/L(j))*V(i,j)*(virtual_v-V(i,j));
             end
             %v3
             if next_node==-1
@@ -162,7 +168,7 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
                 end
                 tmp_v3=virtual_a/virtual_b;
             end
-            vl2(j)=vl1(j)+tmp_v1+tmp_v2+tmp_v3;
+            V(i+1,j)=V(i,j)+tmp_v1+tmp_v2+tmp_v3;
            
             %q
             ql2(j)=rhol2(j)*vl2(j)*lambdal(j);
@@ -179,8 +185,9 @@ function pi=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff
         pi=pi+phiw*sum(dw);
         
        %% Discard old state
+        %except V - keeping them for travel time estimation
         rhol1=rhol;
-        vl1=vl2;
+        %vl1=vl2;
         %qin1=qin2;
         %qout1=qout2;
         w1=w2;

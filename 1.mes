@@ -6,43 +6,95 @@ Comment:
 Date:     2008Äê12ÔÂ2ÈÕ 1:02:05
 
 Measurement     1: Data Collection Point(s) 1, 2, 3
-Measurement     2: Data Collection Point(s) 4, 5
-Measurement     3: Data Collection Point(s) 6, 7
-Measurement     4: Data Collection Point(s) 8
-Measurement     5: Data Collection Point(s) 9, 10
-Measurement     6: Data Collection Point(s) 11
-Measurement     7: Data Collection Point(s) 12, 13, 14, 15
-Measurement     8: Data Collection Point(s) 16, 17, 18
-Measurement     9: Data Collection Point(s) 19, 20
-Measurement    10: Data Collection Point(s) 21, 22
-Measurement    11: Data Collection Point(s) 23
-Measurement    12: Data Collection Point(s) 24
-Measurement    13: Data Collection Point(s) 25
-Measurement    14: Data Collection Point(s) 26
-Measurement    15: Data Collection Point(s) 27
-Measurement    16: Data Collection Point(s) 28, 29
-Measurement    17: Data Collection Point(s) 30
-Measurement    18: Data Collection Point(s) 31
-Measurement    19: Data Collection Point(s) 32, 33, 34, 35
-Measurement    20: Data Collection Point(s) 36
-Measurement    21: Data Collection Point(s) 37
-Measurement    22: Data Collection Point(s) 38
-Measurement    23: Data Collection Point(s) 39, 40
-Measurement    24: Data Collection Point(s) 41
-Measurement    25: Data Collection Point(s) 42, 43
-Measurement    26: Data Collection Point(s) 44
-Measurement    27: Data Collection Point(s) 45, 46, 47
-Measurement    28: Data Collection Point(s) 48, 49, 50
-Measurement    29: Data Collection Point(s) 51, 52, 53
-Measurement    30: Data Collection Point(s) 54, 55, 56
-Measurement    31: Data Collection Point(s) 57, 58, 59
-Measurement    32: Data Collection Point(s) 60, 61, 62, 63
-Measurement    33: Data Collection Point(s) 64, 65, 66, 67
-Measurement    34: Data Collection Point(s) 68, 69, 70, 71
-Measurement    35: Data Collection Point(s) 72, 73, 74, 75
-Measurement    36: Data Collection Point(s) 76, 77, 78
-Measurement    37: Data Collection Point(s) 79, 80, 81
-Measurement    38: Data Collection Point(s) 82, 83, 84
+Measurement     4: Data Collection Point(s) 4, 5, 6
+Measurement     7: Data Collection Point(s) 7, 8, 9
+Measurement    10: Data Collection Point(s) 10, 11, 12
+Measurement    13: Data Collection Point(s) 13, 14, 15
+Measurement    16: Data Collection Point(s) 16, 17, 18
+Measurement    19: Data Collection Point(s) 19, 20, 21
+Measurement    22: Data Collection Point(s) 22, 23, 24
+Measurement    25: Data Collection Point(s) 25, 26, 27
+Measurement    28: Data Collection Point(s) 28, 29, 30
+Measurement    31: Data Collection Point(s) 31, 32, 33
+Measurement    34: Data Collection Point(s) 34, 35, 36
+Measurement    37: Data Collection Point(s) 37, 38, 39
+Measurement    40: Data Collection Point(s) 40, 41, 42
+Measurement    43: Data Collection Point(s) 43, 44, 45
+Measurement    46: Data Collection Point(s) 46, 47, 48, 49
+Measurement    50: Data Collection Point(s) 50, 51, 52, 53
+Measurement    54: Data Collection Point(s) 54, 55, 56, 57
+Measurement    58: Data Collection Point(s) 58, 59, 60, 61
+Measurement    62: Data Collection Point(s) 62, 63, 64, 65
+Measurement    66: Data Collection Point(s) 66, 67, 68, 69
+Measurement    70: Data Collection Point(s) 70, 71, 72, 73
+Measurement    74: Data Collection Point(s) 74, 75, 76, 77
+Measurement    78: Data Collection Point(s) 78, 79, 80, 81
+Measurement    82: Data Collection Point(s) 82, 83, 84, 85
+Measurement    86: Data Collection Point(s) 86, 87, 88, 89
+Measurement    90: Data Collection Point(s) 90, 91, 92, 93
+Measurement    94: Data Collection Point(s) 94, 95, 96, 97
+Measurement    98: Data Collection Point(s) 98, 99, 100, 101
+Measurement   102: Data Collection Point(s) 102, 103, 104, 105
+Measurement   106: Data Collection Point(s) 106, 107, 108, 109
+Measurement   110: Data Collection Point(s) 110, 111, 112, 113
+Measurement   114: Data Collection Point(s) 114, 115, 116, 117
+Measurement   118: Data Collection Point(s) 118, 119, 120
+Measurement   121: Data Collection Point(s) 121, 122, 123
+Measurement   124: Data Collection Point(s) 124, 125, 126
+Measurement   127: Data Collection Point(s) 127, 128, 129
+Measurement   130: Data Collection Point(s) 130, 131, 132
+Measurement   133: Data Collection Point(s) 133, 134, 135
+Measurement   136: Data Collection Point(s) 136, 137, 138
+Measurement   139: Data Collection Point(s) 139, 140, 141
+Measurement   142: Data Collection Point(s) 142, 143, 144
+Measurement   145: Data Collection Point(s) 145, 146, 147
+Measurement   148: Data Collection Point(s) 148, 149, 150
+Measurement   151: Data Collection Point(s) 151, 152, 153
+Measurement   154: Data Collection Point(s) 154, 155
+Measurement   156: Data Collection Point(s) 156, 157
+Measurement   158: Data Collection Point(s) 158
+Measurement   159: Data Collection Point(s) 159, 160
+Measurement   161: Data Collection Point(s) 161
+Measurement   162: Data Collection Point(s) 162, 163, 164
+Measurement   165: Data Collection Point(s) 165, 166
+Measurement   167: Data Collection Point(s) 167, 168
+Measurement   169: Data Collection Point(s) 169
+Measurement   170: Data Collection Point(s) 170
+Measurement   171: Data Collection Point(s) 171
+Measurement   172: Data Collection Point(s) 172
+Measurement   173: Data Collection Point(s) 173
+Measurement   174: Data Collection Point(s) 174
+Measurement   175: Data Collection Point(s) 175
+Measurement   176: Data Collection Point(s) 176
+Measurement   177: Data Collection Point(s) 177
+Measurement   178: Data Collection Point(s) 178, 179
+Measurement   180: Data Collection Point(s) 180, 181
+Measurement   182: Data Collection Point(s) 182
+Measurement   183: Data Collection Point(s) 183
+Measurement   184: Data Collection Point(s) 184
+Measurement   185: Data Collection Point(s) 185
+Measurement   186: Data Collection Point(s) 186
+Measurement   187: Data Collection Point(s) 187
+Measurement   188: Data Collection Point(s) 188
+Measurement   189: Data Collection Point(s) 189
+Measurement   190: Data Collection Point(s) 190
+Measurement   191: Data Collection Point(s) 191
+Measurement   192: Data Collection Point(s) 192, 193
+Measurement   194: Data Collection Point(s) 194, 195
+Measurement   196: Data Collection Point(s) 196, 197
+Measurement   198: Data Collection Point(s) 198, 199
+Measurement   200: Data Collection Point(s) 200, 201
+Measurement   202: Data Collection Point(s) 202, 203
+Measurement   204: Data Collection Point(s) 204
+Measurement   205: Data Collection Point(s) 205
+Measurement   206: Data Collection Point(s) 206, 207, 208, 209
+Measurement   210: Data Collection Point(s) 210, 211, 212, 213
+Measurement   214: Data Collection Point(s) 214, 215, 216, 217
+Measurement   218: Data Collection Point(s) 218, 219, 220, 221
+Measurement   222: Data Collection Point(s) 222, 223, 224, 225
+Measurement   226: Data Collection Point(s) 226, 227, 228, 229
+Measurement   230: Data Collection Point(s) 230, 231, 232, 233
+Measurement   234: Data Collection Point(s) 234, 235, 236, 237
 
 Measur.: Data Collection Number
 from: Start time of the Aggregation interval
@@ -53,41 +105,93 @@ Number Veh: Number of Vehicles
 Measur.;from;to;Speed;Number Veh
        ;    ;  ;Mean;
        ;    ;  ;all veh. types;all veh. types
-1;0;41;110.4;2
-2;0;41;108.4;1
-3;0;41;105.7;4
-4;0;41;0.0;0
-5;0;41;0.0;0
-6;0;41;113.5;2
-7;0;41;109.9;7
-8;0;41;104.1;4
-9;0;41;97.7;1
-10;0;41;0.0;0
-11;0;41;0.0;0
-12;0;41;0.0;0
-13;0;41;0.0;0
-14;0;41;0.0;0
-15;0;41;0.0;0
-16;0;41;0.0;0
-17;0;41;0.0;0
-18;0;41;0.0;0
-19;0;41;0.0;0
-20;0;41;0.0;0
-21;0;41;0.0;0
-22;0;41;0.0;0
-23;0;41;0.0;0
-24;0;41;0.0;0
-25;0;41;0.0;0
-26;0;41;0.0;0
-27;0;41;0.0;0
-28;0;41;0.0;0
-29;0;41;0.0;0
-30;0;41;0.0;0
-31;0;41;0.0;0
-32;0;41;0.0;0
-33;0;41;0.0;0
-34;0;41;0.0;0
-35;0;41;0.0;0
-36;0;41;0.0;0
-37;0;41;0.0;0
-38;0;41;0.0;0
+1;0;121;101.5;13
+4;0;121;118.3;7
+7;0;121;118.6;5
+10;0;121;119.1;5
+13;0;121;118.8;3
+16;0;121;115.8;1
+19;0;121;116.4;1
+22;0;121;113.8;2
+25;0;121;116.5;2
+28;0;121;116.7;2
+31;0;121;119.6;1
+34;0;121;0.0;0
+37;0;121;98.7;7
+40;0;121;112.6;5
+43;0;121;117.7;1
+46;0;121;0.0;0
+50;0;121;0.0;0
+54;0;121;0.0;0
+58;0;121;103.5;1
+62;0;121;121.4;1
+66;0;121;0.0;0
+70;0;121;89.5;5
+74;0;121;111.7;4
+78;0;121;120.6;2
+82;0;121;0.0;0
+86;0;121;0.0;0
+90;0;121;0.0;0
+94;0;121;103.9;4
+98;0;121;0.0;0
+102;0;121;0.0;0
+106;0;121;100.3;1
+110;0;121;0.0;0
+114;0;121;0.0;0
+118;0;121;103.2;1
+121;0;121;0.0;0
+124;0;121;0.0;0
+127;0;121;0.0;0
+130;0;121;0.0;0
+133;0;121;0.0;0
+136;0;121;0.0;0
+139;0;121;0.0;0
+142;0;121;0.0;0
+145;0;121;0.0;0
+148;0;121;0.0;0
+151;0;121;0.0;0
+154;0;121;102.6;3
+156;0;121;87.0;7
+158;0;121;0.0;0
+159;0;121;86.5;1
+161;0;121;83.1;6
+162;0;121;31.3;5
+165;0;121;97.0;1
+167;0;121;101.3;1
+169;0;121;0.0;0
+170;0;121;0.0;0
+171;0;121;0.0;0
+172;0;121;0.0;0
+173;0;121;0.0;0
+174;0;121;0.0;0
+175;0;121;0.0;0
+176;0;121;0.0;0
+177;0;121;0.0;0
+178;0;121;0.0;0
+180;0;121;0.0;0
+182;0;121;0.0;0
+183;0;121;0.0;0
+184;0;121;0.0;0
+185;0;121;0.0;0
+186;0;121;0.0;0
+187;0;121;0.0;0
+188;0;121;0.0;0
+189;0;121;0.0;0
+190;0;121;0.0;0
+191;0;121;0.0;0
+192;0;121;0.0;0
+194;0;121;0.0;0
+196;0;121;0.0;0
+198;0;121;0.0;0
+200;0;121;0.0;0
+202;0;121;0.0;0
+204;0;121;0.0;0
+205;0;121;0.0;0
+206;0;121;0.0;0
+210;0;121;0.0;0
+214;0;121;0.0;0
+218;0;121;0.0;0
+222;0;121;108.2;1
+226;0;121;111.7;1
+230;0;121;0.0;0
+234;0;121;0.0;0

@@ -219,3 +219,5 @@ pip-log.txt
 *.png
 *.err
 Untitled.BMP
+*.lsa
+*.stz

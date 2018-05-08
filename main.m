@@ -12,7 +12,7 @@ b1=ones(20,Nc-1);
 for i=1:Nc-1
     b1(:,i)=b1(:,i).*b0;
 end
-b1=[b0,b10];
+b1=[b0,b1];
 X0=[r1,b1];
 
 %% Construct UB and LB
@@ -28,13 +28,23 @@ lb_b=lb_b*bmin;
 lb=[lb_r,lb_b];
 
 %% Optimization
+
 [X,fval,exitflag,output]=fmincon(...
-    @(X0) obj_function(...
+    @(X0) wrapper(...
         X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
         Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,...
         phir,phib,phiw,vf,alpha,A,E,T),...
     [],[],[],[],lb,ub);
 
 %% Split Matrix
+
+%Get the future mean speed of all links to estimate travel time of all
+%possible routes
+
+[~,V]=obj_function(...
+        X,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
+        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,...
+        phir,phib,phiw,vf,alpha,A,E,T);
+    
 b0=X(1:9,1:Nc);
 r0=X(1:20,(Nc+1):(2*Nc));
