@@ -1,10 +1,17 @@
+function [b1,r1,V,fval,exitflag,output]=opt(b0,r0,rhol,vl,ql,Ll,Loff,...
+        lambdal,lambdaoff,d,beta,w,rhooff,...
+        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,wmax,...
+        phir,phib,phiw,vf,alpha,A,E,T,Nc,rmin,bmin)
 
 %% Construct Variant Matrix X0
 b0=b0';
 r0=r0';
 r1=ones(9,Nc-1);
 for i=1:Nc-1
-   r1(:,i)=r1(:,i).*r0;
+    r1(:,i)=r1(:,i).*r0;
+   %for j=1:9
+    %  r1(j,i)=r1(j,i)*r0(j); 
+   %end
 end
 r1=[r0,r1];
 r1=[r1;zeros(11,Nc)];
@@ -32,9 +39,9 @@ lb=[lb_r,lb_b];
 [X,fval,exitflag,output]=fmincon(...
     @(X0) wrapper(...
         X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
-        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,...
+        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,wmax,...
         phir,phib,phiw,vf,alpha,A,E,T),...
-    [],[],[],[],lb,ub);
+    X0,[],[],[],[],lb,ub);
 
 %% Split Matrix
 
@@ -43,8 +50,12 @@ lb=[lb_r,lb_b];
 
 [~,V]=obj_function(...
         X,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
-        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,...
+        Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,wmax,...
         phir,phib,phiw,vf,alpha,A,E,T);
     
-b0=X(1:9,1:Nc);
-r0=X(1:20,(Nc+1):(2*Nc));
+b1=X(1:9,1:Nc);
+b1=b1';
+r1=X(1:20,(Nc+1):(2*Nc));
+r1=r1';
+
+end

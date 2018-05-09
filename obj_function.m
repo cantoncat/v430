@@ -1,10 +1,10 @@
 
 %original objective function
 %output V is suppressed by wrapper() in fmincin()
-%output pi is supressed while estimating future traffic conditions
+%output pi is suppressed while estimating future traffic conditions
 
 function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
-    Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,... %qin% %qout%
+    Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,wmax,... %qin% %qout%
     phir,phib,phiw,vf,alpha,A,E,T)
     
     %split input matrix
@@ -94,7 +94,7 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
        %% On-ramps
         for j=1:13  %each node
             if d(j)~=0
-                qo1=d(j)+w1(j)/T;
+                qo1=d(j)+w1(j)/(T/3600);
                 link_id=onramp_next_link(j);
                 qo2=Qc(link_id)*min(1,(rhomax-rhol1(link_id))...
                     /(rhomax-rhocrit));
@@ -141,7 +141,7 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
             if prev_node==-1
                 tmp_v2=0;
             elseif prev_node==0
-                tmp_v2=(T/L(j))*V(i,j)*(V(i,j-1)-V(i,j));
+                tmp_v2=((T/3600)/L(j))*V(i,j)*(V(i,j-1)-V(i,j));
             else
                 on_link=node_in_out(prev_node,1);
                 virtual_a=V(i,j-1)*ql1(j-1)...
