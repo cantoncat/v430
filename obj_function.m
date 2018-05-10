@@ -36,6 +36,11 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
     Qo=zeros(1,13);
     
     onramp_next_link=[0;3;0;5;6;9;10;12;13;16;0;18;0];
+    %link_last_onramp=[];
+        %0;0;1;0;2;...
+        %3;0;0;4;5;...
+        %0;6;7;0;0;...
+        %8;0;9;0;0]
     
     node_in_out=[...    %in out1 out2 out3 in_link_no
         0,1,0,0,1;...   %1
@@ -80,9 +85,9 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
        
         %% Qo
         for j=1:13
-            Qo=ql1(node_in_out(j,5));
+            Qo(j)=ql1(node_in_out(j,5));
             if node_in_out(j,1)~=0
-                Qo=Qo+qin1(node_in_out(j,1));
+                Qo(j)=Qo(j)+qin1(node_in_out(j,1));
             end
             %for k=2:4
             %   if node_in_out(j,k)~=0
@@ -96,10 +101,10 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
             if d(j)~=0
                 qo1=d(j)+w1(j)/(T/3600);
                 link_id=onramp_next_link(j);
-                qo2=Qc(link_id)*min(1,(rhomax-rhol1(link_id))...
+                qo2=Qc(node_in_out(j,1))*min(1,(rhomax-rhol1(link_id))...
                     /(rhomax-rhocrit));
-                qin1(link_id)=r(j,min(i,Nc))*min(qo1,qo2);
-                w2(j)=w1(j)+T*(d(j)-qin1(link_id));
+                qin1(link_id)=r(node_in_out(j,1),min(i,Nc))*min(qo1,qo2);
+                w2(j)=w1(j)+T*(d(j)-qin1(link_id))/3600;
             end
         end
         
@@ -131,9 +136,9 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
             
             %v
             %v1
-            tmp_b=b(j,min(i,Np-1));
+            tmp_b=b(j,min(i,Nc));
             tmp_v_f=vf*tmp_b;
-            tmp_rho_crit=rho_crit*(1+A*(1-tmp_b));
+            tmp_rho_crit=rhocrit*(1+A*(1-tmp_b));
             tmp_alpha=alpha*(E-(E-1)*tmp_b);
             tmp_v1=T*(tmp_v_f*exp(-(1/tmp_alpha)*...
                 ((rhol1(j)/tmp_rho_crit).^tmp_alpha)))/tau;
@@ -141,37 +146,44 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
             if prev_node==-1
                 tmp_v2=0;
             elseif prev_node==0
-                tmp_v2=((T/3600)/L(j))*V(i,j)*(V(i,j-1)-V(i,j));
+                tmp_v2=((T/3600)/Ll(j))*V(i,j)*(V(i,j-1)-V(i,j));
             else
                 on_link=node_in_out(prev_node,1);
-                virtual_a=V(i,j-1)*ql1(j-1)...
-                    +qin1(on_link)*von1(on_link);    %Numerator for virtual_v
-                virtual_b=ql1(j-1)+qin1(on_link);    %Denominator for virtual_v
-                virtual_v=virtual_a/virtual_b;
-                tmp_v2=(T/L(j))*V(i,j)*(virtual_v-V(i,j));
+                if ((on_link~=0) && (on_link~=-1))
+                    virtual_a=V(i,j-1)*ql1(j-1)...
+                        +qin1(on_link)*von1(on_link);    %Numerator for virtual_v
+                    virtual_b=ql1(j-1)+qin1(on_link);    %Denominator for virtual_v
+                    virtual_v=virtual_a/virtual_b;
+                    tmp_v2=((T/3600)/Ll(j))*V(i,j)*(virtual_v-V(i,j));
+                else
+                    % last node does not have an on-ramp
+                    tmp_v2=((T/3600)/Ll(j))*V(i,j)*(V(i,j-1)-V(i,j));
+                end
             end
             %v3
             if next_node==-1
                 tmp_v3=0;
             elseif next_node==0
-                tmp_v3=-((theta*T)/(tau*Ll(j-1)))*...
-                    (rho1(j+1)-rho1(j))/(rho1(j)+kappa);
+                tmp_v3=-((theta*T)/(tau*Ll(j)))*...
+                    (rhol1(j+1)-rhol1(j))/(rhol1(j)+kappa);
             else
-                virtual_a=rho1(j+1).^2;
-                virtual_b=rho1(j+1);
+                virtual_a=(rhol1(j+1))^2;
+                virtual_b=rhol1(j+1);
                 for k=2:4
-                    out_link=node_in_out(prev_node,k);
-                    if out_link~=0
+                    out_link=node_in_out(next_node,k);
+                    if ((out_link~=0) && (out_link~=-1))
                        virtual_a=virtual_a+rhooff1(out_link).^2;
                        virtual_b=virtual_b+rhooff1(out_link);
                     end
                 end
-                tmp_v3=virtual_a/virtual_b;
+                virtual_rho=virtual_a/virtual_b;
+                tmp_v3=-((theta*T)/(tau*Ll(j)))*...
+                    (virtual_rho-rhol1(j))/(rhol1(j)+kappa);
             end
             V(i+1,j)=V(i,j)+tmp_v1+tmp_v2+tmp_v3;
            
             %q
-            ql2(j)=rhol2(j)*vl2(j)*lambdal(j);
+            ql2(j)=rhol2(j)*V(i+1,j)*lambdal(j);
 
         end
         
@@ -192,10 +204,10 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
         %qout1=qout2;
         w1=w2;
         rhooff1=rhooff2;
-        von1=von2;
+        %von1=von2;
         ql1=ql2;
         rhol2=zeros(1,20);
-        vl2=zeros(1,20);
+        %vl2=zeros(1,20);
         ql2=zeros(1,20);
         %qin2=zeros(9,1);
         %qout2=zeros(14,1);
@@ -205,21 +217,21 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
     end
     
     %b
-    db=zeros(20,Np-1);
+    db=zeros(20,Nc-1);
     for i=1:20
-       for j=1:Np-1
-          db(i,j)=(b(i,j+1)-b(i.j)).^2; 
+       for j=1:Nc-1
+          db(i,j)=(b(i,j+1)-b(i,j))^2; 
        end
     end
     
     %r
-    dr=zeros(9,Np-1);
+    dr=zeros(9,Nc-1);
     for i=1:9
-       for j=1:Np-1
-          dr(i,j)=(r(i,j+1)-r(i.j)).^2; 
+       for j=1:Nc-1
+          dr(i,j)=(r(i,j+1)-r(i,j))^2; 
        end
     end
     
-    pi=pi+phir*sum(dr)+phib*sum(db);
+    pi=pi+phir*sum(sum(dr))+phib*sum(sum(db));
     
 end
