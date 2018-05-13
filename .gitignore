@@ -222,3 +222,7 @@ Untitled.BMP
 *.lsa
 *.stz
 *.mes
+*.mat
+Untitled*.m
+*.zip
+*.7z
