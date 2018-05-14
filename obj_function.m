@@ -1,9 +1,10 @@
 
 %original objective function
 %output V is suppressed by wrapper() in fmincin()
+%output qo is suppressed by wrapper() in fmincin()
 %output pi is suppressed while estimating future traffic conditions
 
-function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
+function [pi,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
     Qc,von,Np,Nc,rhomax,rhocrit,tau,kappa,theta,wmax,... %qin% %qout%
     phir,phib,phiw,vf,alpha,A,E,T)
     
@@ -14,6 +15,7 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
     b=X0(1:20,Nc+1:(2*Nc));
     
     %% initial values
+    qo=zeros(1,13);
     V=zeros(Np-1,20);
     V=[vl;V];
     % 1 for k and 2 for k+1 except for V the matrix
@@ -102,6 +104,9 @@ function [pi,V]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rh
                 link_id=onramp_next_link(j);
                 qo2=Qc(node_in_out(j,1))*min(1,(rhomax-rhol1(link_id))...
                     /(rhomax-rhocrit));
+                if i==1
+                    qo(j)=min(qo1,qo2);
+                end
                 qin1(link_id)=r(node_in_out(j,1),min(i,Nc))*min(qo1,qo2);
                 w2(j)=w1(j)+T*(d(j)-qin1(link_id))/3600;
             end

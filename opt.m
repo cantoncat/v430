@@ -1,4 +1,4 @@
-function [b1,r1,V,fval,exitflag,output]=opt(b0,r0,rhol,vl,ql,Ll,Loff,...
+function [b1,r1,V,qo,fval,exitflag,output]=opt(b0,r0,rhol,vl,ql,Ll,Loff,...
         lambdal,lambdaoff,d,beta,w,rhooff,...
         Qc,von,Np,rhomax,rhocrit,tau,kappa,theta,wmax,...
         phir,phib,phiw,vf,alpha,A,E,T,Nc,rmin,bmin)
@@ -36,7 +36,7 @@ lb=[lb_r,lb_b];
 
 %% Optimization
 
-options=optimoptions('fmincon','Algorithm','sqp','Display','iter');
+options=optimoptions('fmincon','Algorithm','sqp','Display','iter','TolX',4e-2);
 
 [X,fval,exitflag,output]=fmincon(...
     @(X) wrapper(...
@@ -50,14 +50,14 @@ options=optimoptions('fmincon','Algorithm','sqp','Display','iter');
 %Get the future mean speed of all links to estimate travel time of all
 %possible routes
 
-[~,V]=obj_function(...
+[~,V,qo]=obj_function(...
         X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
         Qc,von,Np,Nc,rhomax,rhocrit,tau,kappa,theta,wmax,...
         phir,phib,phiw,vf,alpha,A,E,T);
     
-b1=X(1:9,1:Nc);
-b1=b1';
-r1=X(1:20,(Nc+1):(2*Nc));
+r1=X(1:9,1:Nc);
 r1=r1';
+b1=X(1:20,(Nc+1):(2*Nc));
+b1=b1';
 
 end
