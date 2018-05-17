@@ -1,10 +1,9 @@
 
 %original objective function
-%output V is suppressed by wrapper() in fmincin()
+%output V,qo,pi_tt,pi_w is suppressed by wrapper() in fmincin()
 %output qo is suppressed by wrapper() in fmincin()
-%output pi is suppressed while estimating future traffic conditions
 
-function [pi,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
+function [pi,pi_tt,pi_w,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w,rhooff,...
     Qc,von,Np,Nc,rhomax,rhocrit,tau,kappa,theta,wmax,... %qin% %qout%
     phir,phib,phiw,vf,alpha,A,E,T)
     
@@ -15,6 +14,8 @@ function [pi,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w
     b=X0(1:20,Nc+1:(2*Nc));
     
     %% initial values
+    pi_tt=0;
+    pi_w=0;
     qo=zeros(1,13);
     V=zeros(Np-1,20);
     V=[vl;V];
@@ -219,11 +220,12 @@ function [pi,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w
         end
         
        %% Travel Time & Queue Length
-        pi=pi+sum(rhol2.*Ll.*lambdal)+sum(w2);
+        pi_tt=pi_tt+sum(rhol2.*Ll.*lambdal);
+        pi_w=pi_w+sum(w2);
         %w
         dw=zeros(13,1);
         for j=1:13
-            dw(j)=power((max((w2(j)-wmax(j)),0)),2);
+            dw(j)=power((max((w2(j)-wmax(j))/wmax(j),0)),2);
         end
         pi=pi+phiw*sum(dw);
         
@@ -266,5 +268,6 @@ function [pi,V,qo]=obj_function(X0,rhol,vl,ql,Ll,Loff,lambdal,lambdaoff,d,beta,w
     end
     
     pi=pi+phir*sum(sum(dr))+phib*sum(sum(db));
+    pi=pi+pi_tt+pi_w;
     
 end
